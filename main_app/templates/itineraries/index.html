@@ -1,23 +1,64 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Itinerary List</h1>
-{% for itinerary in itineraries %}
+<h1>Itinerary Details</h1>
 
-
-<div class="card">
-    <!-- Add this <a> tag -->
-    <a href="/itineraries/{{ itinerary.id }}">
+<div class="row">
+  <div class="col s6">
+    <div class="card">
       <div class="card-content">
         <span class="card-title">{{ itinerary.name }}</span>
-        <p>Date From: {{ itinerary.date_from }}</p>
-        <p>Date To: {{ itinerary.date_to }}</p>
+        <p>Date from: {{ itinerary.date_from }}</p>
+        <p>Date to: {{ itinerary.date_to}}</p>
         <p>Location: {{ itinerary.location }}</p>
-        <p>Description: {{ itinerary.description|linebreaks }}</p>
+        <p>Description: {{ itinerary.description| linebreaks }}</p>
       </div>
-    <!-- Don't forget the </a> closing tag -->
-    </a>
-  </div>
+      <div class="card-action">
+      </div>
+    </div>
+  <!-- New Markup Below -->
 
-{% endfor %}
+  <!-- New Markup Above -->
+</div>
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>{{ itinerary.name }}'s Attractions</h3>
+        {% if itinerary.attractions.count %}
+        {% for attraction in itinerary.attractions.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                     {{ attraction.name }}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        {% endif %}
+    </div>
+    <!-- Available rarities will come after this line -->
+    <div class="col s6">
+        <h3>Attractions</h3>
+        {% if attractions.count %}
+        {% for attraction in attractions.all %}
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    {{ attraction.name }}
+                </span>
+            </div>
+            <div class="card-action">
+                <form action="{% url 'assoc_attraction' itinerary.id attraction.id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Add</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h5>{{itinerary.name}} All Attractions Available</h5>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
