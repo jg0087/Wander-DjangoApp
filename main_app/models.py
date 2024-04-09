@@ -31,7 +31,7 @@ class List(models.Model):
   itinerary = models.ForeignKey(Itinerary, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f"{self.get_location_display()} on {self.date}"
+    return f'{self.location} on {self.date}'
 
   class Meta:
     ordering = ['-date']

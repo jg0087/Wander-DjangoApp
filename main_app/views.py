@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Itinerary
-from .forms import ListForm
 from django.contrib.auth import login
-
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Itinerary
+from .forms import ListForm
 
 # Create your views here.
 def home(request):
@@ -16,6 +15,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def itinerarys_index(request):
   itinerarys = Itinerary.objects.all()
   return render(request, 'itinerarys/index.html', {
@@ -29,6 +29,7 @@ def itinerarys_user_index(request):
     'itinerarys': itinerarys
   })
 
+@login_required
 def itinerarys_detail(request, itinerary_id):
    itinerary = Itinerary.objects.get(id=itinerary_id)
    list_form = ListForm()
@@ -37,19 +38,17 @@ def itinerarys_detail(request, itinerary_id):
       'list_form': list_form
    })
 
-
 class ItineraryCreate(LoginRequiredMixin, CreateView):
    model = Itinerary
-   fields = ['name', 'date_from', 'date_to', 'loitineraryion', 'description']
+   fields = ['name', 'date_from', 'date_to', 'location', 'description']
+   
    def form_valid(self, form):
     form.instance.user = self.request.user 
     return super().form_valid(form)
 
-
-
 class ItineraryUpdate(LoginRequiredMixin, UpdateView):
    model = Itinerary
-   fields = '__all__'
+   fields = ['name', 'date_from', 'date_to', 'location', 'description']
 
 
 class ItineraryDelete(LoginRequiredMixin, DeleteView):
@@ -64,7 +63,6 @@ def add_list(request, itinerary_id):
     new_list.itinerary_id = itinerary_id
     new_list.save()
   return redirect('detail', itinerary_id=itinerary_id)
-
 
 def signup(request):
   error_message = ''
