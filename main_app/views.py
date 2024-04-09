@@ -15,6 +15,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def itinerarys_index(request):
   itinerarys = Itinerary.objects.all()
   return render(request, 'itinerarys/index.html', {
@@ -28,6 +29,7 @@ def itinerarys_user_index(request):
     'itinerarys': itinerarys
   })
 
+@login_required
 def itinerarys_detail(request, itinerary_id):
    itinerary = Itinerary.objects.get(id=itinerary_id)
    list_form = ListForm()
@@ -35,7 +37,6 @@ def itinerarys_detail(request, itinerary_id):
       'itinerary': itinerary,
       'list_form': list_form
    })
-
 
 class ItineraryCreate(LoginRequiredMixin, CreateView):
    model = Itinerary
@@ -45,11 +46,9 @@ class ItineraryCreate(LoginRequiredMixin, CreateView):
     form.instance.user = self.request.user 
     return super().form_valid(form)
 
-
-
 class ItineraryUpdate(LoginRequiredMixin, UpdateView):
    model = Itinerary
-   fields = '__all__'
+   fields = ['name', 'date_from', 'date_to', 'location', 'description']
 
 
 class ItineraryDelete(LoginRequiredMixin, DeleteView):
@@ -64,7 +63,6 @@ def add_list(request, itinerary_id):
     new_list.itinerary_id = itinerary_id
     new_list.save()
   return redirect('detail', itinerary_id=itinerary_id)
-
 
 def signup(request):
   error_message = ''
