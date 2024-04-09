@@ -2,6 +2,7 @@
 {% block content %}
 
 <h1>Itinerary List</h1>
+<a href="{% url 'itinerarys_create' %}" class="btn">Add Itinerary</a>
 
 {% for itinerary in itinerarys %}
   <div class="card">

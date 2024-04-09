@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Itinerary
-from .forms import ListForm
 from django.contrib.auth import login
-
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Itinerary
+from .forms import ListForm
 
 # Create your views here.
 def home(request):
@@ -40,7 +39,8 @@ def itinerarys_detail(request, itinerary_id):
 
 class ItineraryCreate(LoginRequiredMixin, CreateView):
    model = Itinerary
-   fields = ['name', 'date_from', 'date_to', 'loitineraryion', 'description']
+   fields = ['name', 'date_from', 'date_to', 'location', 'description']
+   
    def form_valid(self, form):
     form.instance.user = self.request.user 
     return super().form_valid(form)
