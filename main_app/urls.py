@@ -9,4 +9,5 @@ urlpatterns = [
     path('itinerarys/create/', views.ItineraryCreate.as_view(), name='itinerarys_create'),
     path('itinerarys/<int:pk>/update/', views.ItineraryUpdate.as_view(), name='itinerarys_update'),
     path('itinerarys/<int:pk>/delete/', views.ItineraryDelete.as_view(), name='itinerarys_delete'),
+    path('accounts/signup/', views.signup, name='signup'),
 ]

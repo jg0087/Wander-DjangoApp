@@ -19,9 +19,20 @@
         </ul>
         <ul class="right">
           <li><a href="/about">About</a></li>
-          <li><a href="{% url 'index' %}">All Itineraries</a></li>
+          <li><a href="{% url 'index' %}">Itineraries</a></li>
+          <li><a>Attractions</a></li>
+          {% if user.is_authenticated %}
           <li><a>My Itineraries</a></li>
-          <li><a>View Attractions</a></li>
+          <li>
+            <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn">Log Out</button>
+            </form>
+          </li>
+          {% else %}
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
