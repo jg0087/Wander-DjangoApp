@@ -15,12 +15,12 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Wander</a></li>
+          <li><a href="{% url 'home' %}" class="left brand-logo">&nbsp;&nbsp;Wander</a></li>
         </ul>
         <ul class="right">
           <li><a href="/about">About</a></li>
-          <li><a href="{% url 'index' %}">My Itineraries</a></li>
-          <li><a>All Itineraries</a></li>
+          <li><a href="{% url 'index' %}">All Itineraries</a></li>
+          <li><a>My Itineraries</a></li>
           <li><a>View Attractions</a></li>
         </ul>
       </div>
