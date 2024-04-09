@@ -10,15 +10,15 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-def itineraries_index(request):
-  itineraries = Itinerary.objects.all()
-  return render(request, 'itineraries/index.html', {
-    'itineraries': itineraries
+def itinerarys_index(request):
+  itinerarys = Itinerary.objects.all()
+  return render(request, 'itinerarys/index.html', {
+    'itinerarys': itinerarys
   })
 
-def itineraries_detail(request, itinerary_id):
+def itinerarys_detail(request, itinerary_id):
    itinerary = Itinerary.objects.get(id=itinerary_id)
-   return render(request, 'itinerary/detail.html', {
+   return render(request, 'itinerarys/detail.html', {
       'itinerary': itinerary
    })
 
@@ -32,4 +32,4 @@ class ItineraryUpdate(UpdateView):
 
 class ItineraryDelete(DeleteView):
    model = Itinerary
-   success_url = '/itineraries'
+   success_url = '/itinerarys'

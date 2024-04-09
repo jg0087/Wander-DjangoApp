@@ -4,8 +4,9 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('about/', views.about, name='about'),
-    path('itineraries/', views.itineraries_index, name='index'),
-    path('itineraries/create/', views.ItineraryCreate.as_view(), name='itineraries_create'),
-    path('itineraries/<int:pk>/update/', views.ItineraryUpdate.as_view(), name='itineraries_update'),
-    path('itineraries/<int:pk>/delete/', views.ItineraryDelete.as_view(), name='itineraries_delete'),
+    path('itinerarys/', views.itinerarys_index, name='index'),
+    path('itinerarys/<int:itinerary_id>/', views.itinerarys_detail, name='detail'),
+    path('itinerarys/create/', views.ItineraryCreate.as_view(), name='itinerarys_create'),
+    path('itinerarys/<int:pk>/update/', views.ItineraryUpdate.as_view(), name='itinerarys_update'),
+    path('itinerarys/<int:pk>/delete/', views.ItineraryDelete.as_view(), name='itinerarys_delete'),
 ]
