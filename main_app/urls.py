@@ -16,4 +16,5 @@ urlpatterns = [
     path('attractions/create/', views.AttractionCreate.as_view(), name='attractions_create'),
     path('attractions/<int:pk>/update/', views.AttractionUpdate.as_view(), name='attractions_update'),
     path('attractions/<int:pk>/delete/', views.AttractionDelete.as_view(), name='attractions_delete'),
+    path('attractions/<int:attraction_id>/add_review/', views.add_review, name='add_review'),
 ]

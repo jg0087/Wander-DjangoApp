@@ -2,6 +2,7 @@
 {% block content %}
 
 <h1>Attraction List</h1>
+<a href="{% url 'attractions_create' %}" class="btn">Add Attraction</a>
 
 {% for attraction in attraction_list %}
 

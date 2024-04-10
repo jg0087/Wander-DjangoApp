@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Itinerary, Attraction
-from .forms import ListForm
+from .forms import ListForm, ReviewForm
 
 # Create your views here.
 def home(request):
@@ -15,19 +15,18 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-@login_required
 def itinerarys_index(request):
   itinerarys = Itinerary.objects.all()
   return render(request, 'itinerarys/index.html', {
     'itinerarys': itinerarys
   })
 
-@login_required
-def itinerarys_user_index(request):
-  itinerarys = Itinerary.objects.filter(user=request.user)
-  return render(request, 'itinerarys/user/index.html', {
-    'itinerarys': itinerarys
-  })
+# @login_required
+# def itinerarys_user_index(request):
+  # itinerarys = Itinerary.objects.filter(user=request.user)
+  # return render(request, 'itinerarys/user/index.html', {
+  #   'itinerarys': itinerarys
+  # })
 
 @login_required
 def itinerarys_detail(request, itinerary_id):
@@ -63,12 +62,15 @@ def add_list(request, itinerary_id):
     new_list.itinerary_id = itinerary_id
     new_list.save()
   return redirect('detail', itinerary_id=itinerary_id)
+  
 
 class AttractionList(ListView):
   model = Attraction
 
 class AttractionDetail(LoginRequiredMixin, DetailView):
   model = Attraction
+  def attraction_form(request):
+    review_form = ReviewForm()
 
 class AttractionCreate(LoginRequiredMixin, CreateView):
   model = Attraction
@@ -83,6 +85,15 @@ class AttractionUpdate(LoginRequiredMixin, UpdateView):
 class AttractionDelete(LoginRequiredMixin, DeleteView):
    model = Attraction
    success_url = '/attractions'
+
+@login_required
+def add_review(request, attraction_id):
+  form = ReviewForm(request.POST)
+  if form.is_valid():
+    new_review = form.save(commit=False)
+    new_review.attraction_id = attraction_id
+    new_review.save()
+  return redirect('attractions_index')
 
 def signup(request):
   error_message = ''
