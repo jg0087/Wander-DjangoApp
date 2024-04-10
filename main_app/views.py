@@ -67,6 +67,23 @@ def add_list(request, itinerary_id):
 class AttractionList(ListView):
   model = Attraction
 
+class AttractionDetail(LoginRequiredMixin, DetailView):
+  model = Attraction
+
+class AttractionCreate(LoginRequiredMixin, CreateView):
+  model = Attraction
+  fields = ['name', 'location']
+   
+
+class AttractionUpdate(LoginRequiredMixin, UpdateView):
+   model = Attraction
+   fields = ['name', 'location']
+
+
+class AttractionDelete(LoginRequiredMixin, DeleteView):
+   model = Attraction
+   success_url = '/attractions'
+
 def signup(request):
   error_message = ''
   if request.method == 'POST':
