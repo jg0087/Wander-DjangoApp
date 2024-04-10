@@ -36,4 +36,13 @@ class List(models.Model):
   class Meta:
     ordering = ['-date']
 
+class Attraction(models.Model):
+  name = models.CharField(max_length=50)
+  location = models.CharField(max_length=100)
+
+  def __str__(self):
+    return f'{self.name} on ({self.id})'
+  
+  def get_absolute_url(self):
+    return reverse('attractions_detail', kwargs={'pk': self.id})
    
