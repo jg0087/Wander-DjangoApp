@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Itinerary
+from .models import Itinerary, Attraction
 from .forms import ListForm
 
 # Create your views here.
@@ -63,6 +63,9 @@ def add_list(request, itinerary_id):
     new_list.itinerary_id = itinerary_id
     new_list.save()
   return redirect('detail', itinerary_id=itinerary_id)
+
+class AttractionList(ListView):
+  model = Attraction
 
 def signup(request):
   error_message = ''

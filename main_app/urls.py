@@ -11,4 +11,5 @@ urlpatterns = [
     path('itinerarys/<int:pk>/delete/', views.ItineraryDelete.as_view(), name='itinerarys_delete'),
     path('accounts/signup/', views.signup, name='signup'),
     path('itinerarys/<int:itinerary_id>/add_list/', views.add_list, name='add_list'),
+    path('attractions/', views.AttractionList.as_view(), name='attractions_index'),
 ]
