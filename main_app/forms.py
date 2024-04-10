@@ -4,4 +4,4 @@ from .models import List
 class ListForm(ModelForm):
   class Meta:
     model = List
-    fields = ['date', 'time', 'location']
+    fields = ['date', 'time', 'attraction']

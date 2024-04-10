@@ -26,20 +26,20 @@ class Itinerary(models.Model):
 class List(models.Model):
   date = models.DateField()
   time = models.TimeField()
-  location = models.CharField()
+  attraction = models.CharField()
 
   itinerary = models.ForeignKey(Itinerary, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f'{self.location} on {self.date}'
+    return f'{self.attraction} on {self.date}'
 
   class Meta:
-    ordering = ['-date']
+    ordering = ['date', 'time']
 
 class Attraction(models.Model):
   name = models.CharField(max_length=50)
   location = models.CharField(max_length=100)
-
+  
   def __str__(self):
     return f'{self.name} on ({self.id})'
   
