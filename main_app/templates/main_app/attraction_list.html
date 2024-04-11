@@ -6,7 +6,7 @@
 
 {% for attraction in attraction_list %}
 
-  <a href="{% url 'attractions_detail' attraction.id %}">
+  <a href="{% url 'attractiondetail' attraction.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ attraction.name }}</span>

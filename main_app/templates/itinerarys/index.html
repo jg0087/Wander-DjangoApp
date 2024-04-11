@@ -9,10 +9,10 @@
     <a href="{% url 'detail' itinerary.id %}">
       <div class="card-content">
         <span class="card-title">{{ itinerary.name }}</span>
-        <p>Date From: {{ itinerary.date_from }}</p>
-        <p>Date To: {{ itinerary.date_to }}</p>
-        <p>Location: {{ itinerary.location }}</p>
-        <p>Description: {{ itinerary.description }}</p>
+        <p>{{ itinerary.date_from }} - {{ itinerary.date_to }}</p>
+        <p>{{ itinerary.location }}</p>
+        <br>
+        <p>{{ itinerary.description }}</p>
       </div>
     </a>
   </div>

@@ -47,7 +47,7 @@
             <tr>
               <td>{{review.user}}</td>
               <td>{{review.review}}</td>
-              <td>{{review.rating}}</td>
+              <td>{{review.get_rating_display}}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -58,6 +58,9 @@
 </div>
 <!-- review form view ends here -->
 </div>
+<script>
+  const selectEl = document.getElementById('id_rating');
+  M.FormSelect.init(selectEl);
+</script>
 
 {% endblock %}
-

@@ -37,6 +37,7 @@ def itinerarys_detail(request, itinerary_id):
       'list_form': list_form
    })
 
+
 class ItineraryCreate(LoginRequiredMixin, CreateView):
    model = Itinerary
    fields = ['name', 'date_from', 'date_to', 'location', 'description']
@@ -67,10 +68,14 @@ def add_list(request, itinerary_id):
 class AttractionList(ListView):
   model = Attraction
 
-class AttractionDetail(LoginRequiredMixin, DetailView):
-  model = Attraction
-  def attraction_form(request):
-    review_form = ReviewForm()
+@login_required
+def attractions_detail(request, attraction_id):
+  attraction = Attraction.objects.get(id=attraction_id)
+  review_form = ReviewForm()
+  return render(request, 'attractions/attractiondetail.html', {
+    'attraction': attraction,
+    'review_form': review_form
+  })
 
 class AttractionCreate(LoginRequiredMixin, CreateView):
   model = Attraction
@@ -92,8 +97,9 @@ def add_review(request, attraction_id):
   if form.is_valid():
     new_review = form.save(commit=False)
     new_review.attraction_id = attraction_id
+    new_review.user_id = request.user.id
     new_review.save()
-  return redirect('attractions_index')
+  return redirect('attractiondetail', attraction_id=attraction_id)
 
 def signup(request):
   error_message = ''
