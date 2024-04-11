@@ -8,10 +8,10 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ itinerary.name }}</span>
-        <p>Date from: {{ itinerary.date_from }}</p>
-        <p>Date to: {{ itinerary.date_to}}</p>
-        <p>Location: {{ itinerary.location }}</p>
-        <p>Description: {{ itinerary.description| linebreaks }}</p>
+        <p>{{ itinerary.date_from }} - {{ itinerary.date_to}}</p>
+        <p>{{ itinerary.location }}</p>
+        <br>
+        <p>{{ itinerary.description| linebreaks }}</p>
       </div>
       <div class="card-action">
         <a href="{% url 'itinerarys_update' itinerary.id %}">Edit</a>
@@ -64,6 +64,7 @@
 
     <!-- users saved attractions ends here  -->
 </div>
+
 <script>
   const dateEl = document.getElementById('id_date');
   M.Datepicker.init(dateEl, {
@@ -72,7 +73,8 @@
     setDefaultDate: true,
     autoClose: true
   });
-  const selectEl = document.getElementById('id_meal');
+  
+  const selectEl = document.getElementById('id_attraction');
   M.FormSelect.init(selectEl);
 </script>
 

@@ -9,4 +9,4 @@ class ListForm(ModelForm):
 class ReviewForm(ModelForm):
   class Meta:
     model = Review
-    fields = ['user', 'review', 'rating']
+    fields = ['review', 'rating']
