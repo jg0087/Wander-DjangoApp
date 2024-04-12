@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Attractions</h1>
+
+<form action="{% url 'attractionindex' %}" method="GET">
+    <input type="text" name="q" placeholder="Search for attractions...">
+    <button type="submit">Search</button>
+</form>
+{% for candidates in response.candidates %}
+{{ candidates.name }}
+    <form action="{% url 'save_attraction' %}" method="POST">
+        {% csrf_token %}
+        <li>{{ candidates.name }}</li>
+        <li>{{ candidates.formatted_address }}</li>
+        <img src="{{ photo_url }}" alt="">
+        <br>
+        <input type="hidden" name="name" value="{{ candidates.name }}">
+        <input type="hidden" name="location" value="{{ candidates.formatted_address }}">
+        <input type="hidden" name="photo" value="{{ photo_url }}">
+        <button type="submit" >Save Attraction</button>
+    </form>
+{% endfor %}
+
+{% for attraction in attractions %}
+  <div class="card">
+    <a href="{% url 'attractiondetail' attraction.id %}">
+      <div class="card-content">
+        <span class="card-title">{{ attraction.name }}</span>
+        <p>{{ attraction.location }}</p>
+        <br>
+        <img src="{{ attraction.photo }}" alt="">
+      </div>
+    </a>
+  </div>
+{% endfor %}
+<!-- <a href="{% url 'attractions_create' %}" class="btn">Add Attraction</a>  -->
+
+{% endblock %}
