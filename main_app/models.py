@@ -14,6 +14,17 @@ RATINGS = (
 
 
 # Create your models here.
+class Attraction(models.Model):
+  name = models.CharField(max_length=50)
+  location = models.CharField(max_length=100)
+  photo = models.TextField(max_length=1000)
+  
+  def __str__(self):
+    return f'{self.name}'
+  
+  def get_absolute_url(self):
+    return reverse('attractions/attractiondetail', kwargs={'attraction_id': self.id})
+  
 class Itinerary(models.Model):
   name = models.CharField(max_length=100)
   date_from = models.DateField('Travel From')
@@ -21,40 +32,31 @@ class Itinerary(models.Model):
   location = models.CharField()
   description = models.TextField(max_length=250)
 
+  attractions = models.ManyToManyField(Attraction)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f'{self.name} ({self.id})'
+    return f'{self.name}'
 
   def get_absolute_url(self):
     return reverse('detail', kwargs={'itinerary_id': self.id})
 
   def list_assigned(self):
     return self.list_set.filter(date=date.today()).count() >= 1
-
+  
 class List(models.Model):
   date = models.DateField()
   time = models.TimeField()
-  attraction = models.CharField()
+  attractions = models.ManyToManyField(Attraction)
 
   itinerary = models.ForeignKey(Itinerary, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f'{self.attraction} on {self.date}'
+    return f'{self.attractions.name} on {self.date}'
 
   class Meta:
     ordering = ['date', 'time']
 
-class Attraction(models.Model):
-  name = models.CharField(max_length=50)
-  location = models.CharField(max_length=100)
-  
-  def __str__(self):
-    return f'{self.name} on ({self.id})'
-  
-  def get_absolute_url(self):
-    return reverse('attractions/attractiondetail', kwargs={'pk': self.id})
-  
 class Review(models.Model):
   review = models.CharField(max_length=100)
   rating = models.CharField(max_length=1, choices=RATINGS, default=RATINGS[0][0])
@@ -63,7 +65,7 @@ class Review(models.Model):
   attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)
 
   def __str__(self):
-    return f"{self.get_rating_display()} on {self.attraction}"
+    return f"{self.user} left a rating of {self.get_rating_display()} on {self.attraction}"
 
   def get_absolute_url(self):
     return reverse('attractions_detail', kwargs={'pk': self.id})

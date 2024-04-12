@@ -50,12 +50,21 @@
             <tr>
               <td>{{list.date}}</td>
               <td>{{list.time}}</td>
-              <td>{{list.attraction}}</td>
+              {% endfor %}
+              
+              {% for attraction in itinerary.attractions.all %}
+              <td>
+                {{attraction.name}}
+              </td>
+              {% endfor %}
               <td><button class="btn">Details</button></td>
             </tr>
-            {% endfor %}
-          </tbody>
+            </tbody>
         </table>
+
+          <!-- {% for attraction in itinerary.attractions.all %}
+            <li>{{attraction.name}}</li>
+          {% endfor %} -->
       </div>
     </div>
   </div>
@@ -74,7 +83,7 @@
     autoClose: true
   });
   
-  const selectEl = document.getElementById('id_attraction');
+  const selectEl = document.getElementById('id_attractions');
   M.FormSelect.init(selectEl);
 </script>
 

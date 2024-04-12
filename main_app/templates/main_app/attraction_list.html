@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Attraction List</h1>
-<a href="{% url 'attractions_create' %}" class="btn">Add Attraction</a>
+<h1>Attractions</h1>
+<form action="{% url 'attractions_index' %}" method="GET">
+  <input type="text" name="q" placeholder="Search for attractions...">
+  <button type="submit">Search</button>
+</form>
+<ul>
+  {% for attraction in attractions %}
+      <li>{{ attraction.name }} - {{ attraction.address }}</li>
+  {% endfor %}
+</ul>
+<!-- <a href="{% url 'attractions_create' %}" class="btn">Add Attraction</a> -->
 
-{% for attraction in attraction_list %}
+<!-- {% for attraction in attraction_list %}
 
   <a href="{% url 'attractiondetail' attraction.id %}">
     <div class="card">
@@ -15,5 +24,5 @@
     </div>
   </a>
 
-{% endfor %}
+{% endfor %} -->
 {% endblock %}
