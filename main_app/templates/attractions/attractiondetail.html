@@ -7,12 +7,9 @@
   <div class="col s6">
     <div class="card">
       <div class="card-content">
+        <img src="{{ attraction.photo }}" alt="">
         <span class="card-title">{{ attraction.name }}</span>
         <p>Location: {{ attraction.location}}</p>
-      </div>
-      <div class="card-action">
-        <a href="{% url 'attractions_update' attraction.id %}">Edit</a>
-        <a href="{% url 'attractions_delete' attraction.id %}">Delete</a>
       </div>
     </div>
     <!-- review form starts here -->

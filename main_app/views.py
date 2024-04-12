@@ -6,9 +6,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # importing models
-from .models import Itinerary, Attraction, List
+from .models import Itinerary, Attraction
 # importing forms
-from .forms import ListForm, ReviewForm
+from .forms import AttractionForm, ReviewForm
 from django.core.management.base import BaseCommand
 from .utils import fetch_and_save_attractions
 from django.http import JsonResponse
@@ -39,16 +39,13 @@ def itinerarys_index(request):
 @login_required
 def itinerarys_detail(request, itinerary_id):
    itinerary = Itinerary.objects.get(id=itinerary_id)
-   list_form = ListForm()
-   list = List.objects.all()
-   print(itinerary)
    id_list = itinerary.attractions.all().values_list('id')
    attractions_itinerary_doesnt_have = Attraction.objects.exclude(id__in=id_list)
+   attraction_form = AttractionForm()
    return render(request, 'itinerarys/detail.html', {
       'itinerary': itinerary,
-      'list_form': list_form,
-      'list': list,
-      'attractions_itinerary_doesnt_have': attractions_itinerary_doesnt_have
+      'attraction_form': attraction_form,
+      'attractions': attractions_itinerary_doesnt_have
    })
 
 class ItineraryCreate(LoginRequiredMixin, CreateView):
@@ -152,18 +149,19 @@ def add_review(request, attraction_id):
   return redirect('attractiondetail', attraction_id=attraction_id)
 
 @login_required
-def add_list(request, itinerary_id):
-  form = ListForm(request.POST)
-  if form.is_valid():
-    new_list = form.save(commit=False)
-    new_list.itinerary_id = itinerary_id
-    new_list.save()
+def assoc_attraction(request, itinerary_id, attraction_id):
+  Itinerary.objects.get(id=itinerary_id).attractions.add(attraction_id)
   return redirect('detail', itinerary_id=itinerary_id)
 
-class Command(BaseCommand):
-    def handle(self, *args, **kwargs):
-        fetch_and_save_attractions(keyword='restaurants', location='New York')
-        self.stdout.write(self.style.SUCCESS('Attractions fetched and saved successfully!'))
+@login_required
+def unassoc_attraction(request, itinerary_id, attraction_id):
+  Itinerary.objects.get(id=itinerary_id).attractions.remove(attraction_id)
+  return redirect('detail', itinerary_id=itinerary_id)
+
+# class Command(BaseCommand):
+#     def handle(self, *args, **kwargs):
+#         fetch_and_save_attractions(keyword='restaurants', location='New York')
+#         self.stdout.write(self.style.SUCCESS('Attractions fetched and saved successfully!'))
 
 def signup(request):
   error_message = ''
