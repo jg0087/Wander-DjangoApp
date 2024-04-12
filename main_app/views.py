@@ -100,7 +100,6 @@ def attractions_index(request):
       'response': JsonResponse({"error": "Failed to fetch place information."}, status=500)
     })
 
-@login_required
 def attractions_detail(request, attraction_id):
   attraction = Attraction.objects.get(id=attraction_id)
   review_form = ReviewForm()

@@ -13,14 +13,17 @@
       </div>
     </div>
     <!-- review form starts here -->
+    {% if user.is_authenticated %}
+    {{ review_form.as_p }}
     <div class="col s6">
       <form action="{% url 'add_review' attraction.id %}" method="POST">
         {% csrf_token %}
         <!-- Render the inputs -->
-        {{ review_form.as_p }}
         <input type="submit" class="btn" value="Add Review">
       </form>
     </div>
+    {% else %}
+    {% endif %}
     <!-- review form ends here -->
       <br>
 </div>
