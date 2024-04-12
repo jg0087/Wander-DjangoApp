@@ -18,7 +18,10 @@
         <input type="hidden" name="name" value="{{ candidates.name }}">
         <input type="hidden" name="location" value="{{ candidates.formatted_address }}">
         <input type="hidden" name="photo" value="{{ photo_url }}">
+        {% if user.is_authenticated %}
         <button type="submit" >Save Attraction</button>
+        {% else %}
+        {% endif %}
     </form>
 {% endfor %}
 

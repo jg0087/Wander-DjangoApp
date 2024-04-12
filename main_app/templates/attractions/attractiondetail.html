@@ -13,6 +13,7 @@
       </div>
     </div>
     <!-- review form starts here -->
+    {% if user.is_authenticated %}
     <div class="col s6">
       <form action="{% url 'add_review' attraction.id %}" method="POST">
         {% csrf_token %}
@@ -21,6 +22,8 @@
         <input type="submit" class="btn" value="Add Review">
       </form>
     </div>
+    {% else %}
+    {% endif %}
     <!-- review form ends here -->
       <br>
 </div>
