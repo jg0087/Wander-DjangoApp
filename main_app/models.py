@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
+from datetime import date, datetime
+from django.utils import timezone
 from django.contrib.auth.models import User
 
 RATINGS = (
@@ -19,12 +20,15 @@ class Attraction(models.Model):
   location = models.CharField(max_length=100)
   photo = models.TextField(max_length=1000)
   
+  
   def __str__(self):
     return f'{self.name}'
   
   def get_absolute_url(self):
     return reverse('attractions/attractiondetail', kwargs={'attraction_id': self.id})
   
+
+    
 class Itinerary(models.Model):
   name = models.CharField(max_length=100)
   date_from = models.DateField('Travel From')
@@ -44,18 +48,6 @@ class Itinerary(models.Model):
   def list_assigned(self):
     return self.list_set.filter(date=date.today()).count() >= 1
   
-class List(models.Model):
-  date = models.DateField()
-  time = models.TimeField()
-  attractions = models.ManyToManyField(Attraction)
-
-  itinerary = models.ForeignKey(Itinerary, on_delete=models.CASCADE)
-
-  def __str__(self):
-    return f'{self.attractions.name} on {self.date}'
-
-  class Meta:
-    ordering = ['date', 'time']
 
 class Review(models.Model):
   review = models.CharField(max_length=100)

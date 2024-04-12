@@ -1,10 +1,10 @@
 from django.forms import ModelForm
-from .models import List, Review
+from .models import Attraction, Review
 
-class ListForm(ModelForm):
+class AttractionForm(ModelForm):
   class Meta:
-    model = List
-    fields = ['date', 'time', 'attractions']
+    model = Attraction
+    fields = ['name']
 
 class ReviewForm(ModelForm):
   class Meta:
