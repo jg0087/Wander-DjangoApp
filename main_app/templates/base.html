@@ -26,7 +26,7 @@
           <li><a href="{% url 'index' %}">Itineraries</a></li>
           <li><a href="{% url 'attractionindex' %}">Attractions</a></li>
           {% if user.is_authenticated %}
-          <li><a>My Itineraries</a></li>
+          <li><a href="{% url 'itinerarys_userindex' %}">My Itineraries</a></li>
           <li>
             <form action="{% url 'logout' %}" method="POST">
               {% csrf_token %}
@@ -40,7 +40,6 @@
         </ul>
     </nav>
   </header>
-  
   <main class="container">
     {% block content %}
     {% endblock %}

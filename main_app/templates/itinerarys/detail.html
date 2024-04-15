@@ -8,17 +8,24 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ itinerary.name }}</span>
+        {% if user.is_authenticated %}
         <p class="it-dates">{{ itinerary.date_from }} - {{ itinerary.date_to}}</p>
+        {% else %}
+        {% endif %}
         <p class="it-location">{{ itinerary.location }}</p>
         <br>
         <p>{{ itinerary.description| linebreaks }}</p>
       </div>
+      {% if user.is_authenticated %}
       <div class="card-action">
         <a href="{% url 'itinerarys_update' itinerary.id %}" id="edit-delete">Edit</a>
         <a href="{% url 'itinerarys_delete' itinerary.id %}" id="edit-delete">Delete</a>
       </div>
+      {% else %}
+      {% endif %}
     </div>
     <!-- list form starts here -->
+    {% if user.is_authenticated %}
     <div class="grid-container">
       {% for attraction in attractions.all %}
       {% if forloop.counter0|divisibleby:2 %}
@@ -26,12 +33,14 @@
       {% endif %}
         <div class="col s6">
           <div class="card card-attraction">
-            <div class="card-content card-content-attraction">
-              <span class="card-title">
-                <p class="name_attraction">{{ attraction.name }}</p>
-                <p class="location">{{ attraction.location }}</p>
-              </span>
-            </div>
+            <a href="{% url 'attractiondetail' attraction.id %}">
+              <div class="card-content card-content-attraction">
+                <span class="card-title">
+                  <p class="name_attraction">{{ attraction.name }}</p>
+                  <p class="location">{{ attraction.location }}</p>
+                </span>
+              </div>
+            </a>
             <div class="card-action">
               <form action="{% url 'assoc_attraction' itinerary.id attraction.id %}" method="POST">
                 {% csrf_token %}
@@ -45,8 +54,8 @@
       {% endif %}
       {% endfor %}
     </div>
-    
-
+    {% else %}
+    {% endif %}
 </div>
 <!-- itinerarys end here -->
 <!-- list form view starts here -->
@@ -54,11 +63,6 @@
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-        <!-- {% if itinerary.fed_for_today %}
-          <div class="card-panel teal-text center-align">{{itinerary.name}} has been assigned an attraction</div>
-        {% else %}
-        <div class="card-panel red-text center-align">{{itinerary.name}} has no attractions</div>
-        {% endif %} -->
         <table>
           <thead>
             <tr><th>Attraction</th></tr>
@@ -66,15 +70,18 @@
           <tbody>
             {% for attraction in itinerary.attractions.all %}
             <tr>
-              <td>{{attraction.name}}</td>            
+              <td>{{attraction.name}}</td>          
               <td><a class="btn" href="{% url 'attractiondetail' attraction.id %}">Details</a></td>
+              {% if user.is_authenticated %}  
               <td>
                 <form action="{% url 'unassoc_attraction' itinerary.id attraction.id %}" method="POST">
                   {% csrf_token %}
                   <button type="submit" class="btn">Remove</button>
                 </form>
               </td>
-              {% endfor %}
+              {% else %}
+              {% endif %}
+            {% endfor %}
             </tr>
             </tbody>
         </table>
@@ -105,4 +112,3 @@
 </script>
 
 {% endblock %}
-

@@ -20,7 +20,10 @@
         <a href="{% url 'detail' itinerary.id %}">
           <div class="card-content">
             <span class="card-title">{{ itinerary.name }}</span>
+            {% if user.is_authenticated %}
             <p>{{ itinerary.date_from }} - {{ itinerary.date_to }}</p>
+            {% else %}
+            {% endif %}
             <p>{{ itinerary.location }}</p>
             <br>
             <p>{{ itinerary.description }}</p>

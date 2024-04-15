@@ -28,15 +28,13 @@ def itinerarys_index(request):
     'itinerarys': itinerarys
   })
 
-
-# @login_required
-# def itinerarys_user_index(request):
-  # itinerarys = Itinerary.objects.filter(user=request.user)
-  # return render(request, 'itinerarys/user/index.html', {
-  #   'itinerarys': itinerarys
-  # })
-
 @login_required
+def itinerarys_userindex(request):
+  itinerarys = Itinerary.objects.filter(user=request.user)
+  return render(request, 'itinerarys/userindex.html', {
+    'itinerarys': itinerarys
+  })
+
 def itinerarys_detail(request, itinerary_id):
    itinerary = Itinerary.objects.get(id=itinerary_id)
    id_list = itinerary.attractions.all().values_list('id')
