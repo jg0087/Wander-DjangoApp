@@ -20,10 +20,10 @@
   <header>
     <nav>
         <ul>
-          <li><a href="{% url 'about' %}" class="left brand-logo"><img class="logo" src="../static/photos/Screenshot 2024-04-06 at 9.34.21 PM (2).png" alt=""></a></li>
+          <li><a href="{% url 'home' %}" class="left brand-logo"><img class="logo" src="../static/photos/Screenshot 2024-04-06 at 9.34.21 PM (2).png" alt=""></a></li>
         </ul>
         <ul class="right">
-          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'index' %}">Itineraries</a></li>
           <li><a href="{% url 'attractionindex' %}">Attractions</a></li>
           {% if user.is_authenticated %}
