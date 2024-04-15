@@ -8,7 +8,7 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ itinerary.name }}</span>
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and user == itinerary.user %}
         <p class="it-dates">{{ itinerary.date_from }} - {{ itinerary.date_to}}</p>
         {% else %}
         {% endif %}
@@ -16,7 +16,7 @@
         <br>
         <p>{{ itinerary.description| linebreaks }}</p>
       </div>
-      {% if user.is_authenticated %}
+      {% if user.is_authenticated and user == itinerary.user %}
       <div class="card-action">
         <a href="{% url 'itinerarys_update' itinerary.id %}" id="edit-delete">Edit</a>
         <a href="{% url 'itinerarys_delete' itinerary.id %}" id="edit-delete">Delete</a>
@@ -25,7 +25,7 @@
       {% endif %}
     </div>
     <!-- list form starts here -->
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user == itinerary.user %}
     <div class="grid-container">
       {% for attraction in attractions.all %}
       {% if forloop.counter0|divisibleby:2 %}
@@ -72,7 +72,7 @@
             <tr>
               <td>{{attraction.name}}</td>          
               <td><a class="btn" href="{% url 'attractiondetail' attraction.id %}">Details</a></td>
-              {% if user.is_authenticated %}  
+              {% if user.is_authenticated and user == itinerary.user %}  
               <td>
                 <form action="{% url 'unassoc_attraction' itinerary.id attraction.id %}" method="POST">
                   {% csrf_token %}

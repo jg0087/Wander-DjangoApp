@@ -213,3 +213,39 @@ nav {
 .form-confirm {
   text-align: center;
 }
+
+
+.parallax-container {
+  height: 500px;
+}
+
+.about-img {
+  max-height: 95vh;
+  width: 50vw;
+  display: block;
+  margin: 0 auto; 
+}
+
+.center-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.logo {
+  width: 7vw;
+}
+
+.highlight {
+  background-color: #C4EBC8;
+}
+
+.btn-journey {
+  background-color: #8B7DCA;
+  color: white;
+}
+
+.btn-journey:hover {
+  color: black;
+}
