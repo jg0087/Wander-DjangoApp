@@ -8,7 +8,7 @@ RATINGS = (
   ('1', '1'),
   ('2', '2'),
   ('3', '3'),
-  ('4','4'),
+  ('4', '4'),
   ('5', '5')
 )
 
@@ -51,7 +51,7 @@ class Itinerary(models.Model):
 
 class Review(models.Model):
   review = models.CharField(max_length=100)
-  rating = models.CharField(max_length=1, choices=RATINGS, default=RATINGS[0][0])
+  rating = models.CharField(max_length=1, choices=RATINGS, default=RATINGS[4][0])
 
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   attraction = models.ForeignKey(Attraction, on_delete=models.CASCADE)

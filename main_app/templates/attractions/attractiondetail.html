@@ -1,17 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Attraction Details</h1>
-<!-- itinerarys start here -->
+<h1>Attraction Details & Reviews</h1>
+
 <div class="row">
-  <div class="col s6">
-    <div class="card">
-      <div class="card-content">
-        <img src="{{ attraction.photo }}" alt="">
-        <span class="card-title">{{ attraction.name }}</span>
-        <p>Location: {{ attraction.location}}</p>
+  <div class="col s12 m6"> 
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ attraction.photo }}" alt="" class="responsive-img card-img">
+        </div>
+        <div class="card-content">
+          <span class="card-title">{{ attraction.name }}</span>
+          <p>{{ attraction.location }}</p>
+        </div>
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col s6">
+      <div class="card">
+        <div class="card-content">
+          <!-- {% if itinerary.fed_for_today %}
+            <div class="card-panel teal-text center-align">{{itinerary.name}} has been assigned an attraction</div>
+          {% else %}
+          <div class="card-panel red-text center-align">{{itinerary.name}} has no attractions</div>
+          {% endif %} -->
+          <table>
+            <thead>
+              <tr><th>User</th><th>Review</th><th>Rating</th></tr>
+            </thead>
+            <tbody>
+              {% for review in attraction.review_set.all %}
+              <tr>
+                <td>{{review.user}}</td>
+                <td>{{review.review}}</td>
+                <td>{{review.get_rating_display}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+  </div>
+
+
     <!-- review form starts here -->
     {% if user.is_authenticated %}
     <div class="col s6">
@@ -24,38 +57,12 @@
     </div>
     {% else %}
     {% endif %}
+  
     <!-- review form ends here -->
       <br>
 </div>
 <!-- attractions end here -->
 <!-- review form view starts here -->
-<div class="row">
-  <div class="col s6">
-    <div class="card">
-      <div class="card-content">
-        <!-- {% if itinerary.fed_for_today %}
-          <div class="card-panel teal-text center-align">{{itinerary.name}} has been assigned an attraction</div>
-        {% else %}
-        <div class="card-panel red-text center-align">{{itinerary.name}} has no attractions</div>
-        {% endif %} -->
-        <table class="striped">
-          <thead>
-            <tr><th>User</th><th>Review</th><th>Rating</th></tr>
-          </thead>
-          <tbody>
-            {% for review in attraction.review_set.all %}
-            <tr>
-              <td>{{review.user}}</td>
-              <td>{{review.review}}</td>
-              <td>{{review.get_rating_display}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
 <!-- review form view ends here -->
 </div>
 <script>

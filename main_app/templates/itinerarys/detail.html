@@ -8,37 +8,45 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ itinerary.name }}</span>
-        <p>{{ itinerary.date_from }} - {{ itinerary.date_to}}</p>
-        <p>{{ itinerary.location }}</p>
+        <p class="it-dates">{{ itinerary.date_from }} - {{ itinerary.date_to}}</p>
+        <p class="it-location">{{ itinerary.location }}</p>
         <br>
         <p>{{ itinerary.description| linebreaks }}</p>
       </div>
       <div class="card-action">
-        <a href="{% url 'itinerarys_update' itinerary.id %}">Edit</a>
-        <a href="{% url 'itinerarys_delete' itinerary.id %}">Delete</a>
+        <a href="{% url 'itinerarys_update' itinerary.id %}" id="edit-delete">Edit</a>
+        <a href="{% url 'itinerarys_delete' itinerary.id %}" id="edit-delete">Delete</a>
       </div>
     </div>
     <!-- list form starts here -->
-    <div class="col s6">
+    <div class="grid-container">
       {% for attraction in attractions.all %}
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title">
-            <p>{{ attraction.name }}</p>
-            <p>{{ attraction.location }}</p>
-          </span>
+      {% if forloop.counter0|divisibleby:2 %}
+      <div class="row">
+      {% endif %}
+        <div class="col s6">
+          <div class="card card-attraction">
+            <div class="card-content card-content-attraction">
+              <span class="card-title">
+                <p class="name_attraction">{{ attraction.name }}</p>
+                <p class="location">{{ attraction.location }}</p>
+              </span>
+            </div>
+            <div class="card-action">
+              <form action="{% url 'assoc_attraction' itinerary.id attraction.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn">Add</button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div class="card-action">
-          <form action="{% url 'assoc_attraction' itinerary.id attraction.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" class="btn">Add</button>
-          </form>
-        </div>
+      {% if forloop.counter|divisibleby:2 or forloop.last %}
       </div>
-    {% endfor %}
+      {% endif %}
+      {% endfor %}
     </div>
-    <!-- list form ends here -->
-      <br>
+    
+
 </div>
 <!-- itinerarys end here -->
 <!-- list form view starts here -->
@@ -51,7 +59,7 @@
         {% else %}
         <div class="card-panel red-text center-align">{{itinerary.name}} has no attractions</div>
         {% endif %} -->
-        <table class="striped">
+        <table>
           <thead>
             <tr><th>Attraction</th></tr>
           </thead>
