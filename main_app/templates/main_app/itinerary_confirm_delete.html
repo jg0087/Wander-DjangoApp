@@ -3,11 +3,12 @@
 {% block content %}
   <h1>Delete Itinerary</h1>
 
-  <h4>Are you sure you want to delete <span class="teal-text">{{ object.name }}</span>?</h4>
+  <h3 class="form-confirm">Are you sure you want to delete {{ object.name }}?</h3>
 
-  <form action="" method="POST">
+  <form action="" method="POST" class="form-confirm"><br>
     {% csrf_token %}
-    <input type="submit" value="Yes - Delete!" class="btn">
+    <input type="submit" value="Yes - Delete !" class="btn"><br>
+    <br>
     <a href="{% url 'detail' itinerary.id %}">Cancel</a>
   </form>
 {% endblock %}
