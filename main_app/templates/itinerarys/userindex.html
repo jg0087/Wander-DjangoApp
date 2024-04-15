@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Itinerary List</h1>
-<a href="{% url 'itinerarys_create' %}" class="btn">Add Itinerary</a>
+<div class="heading-container">
+<h1>Your Personal Itineraries</h1>
+<a href="{% url 'itinerarys_create' %}" class="btn"><i style="color: black;">+</i></a>
+</div>
 
-{% for itinerary in itinerarys %}
-  <div class="card">
-    <a href="{% url 'detail' itinerary.id %}">
-      <div class="card-content">
+<div class="row">
+  {% for itinerary in itinerarys %}
+    {% if forloop.counter0|divisibleby:2 %}
+      </div><div class="row">
+        {% endif %}
+        <div class="col s12 m6">
+        <div class="card">
+         <a href="{% url 'detail' itinerary.id %}">
+          <div class="card-content">
         <span class="card-title">{{ itinerary.name }}</span>
         <p>{{ itinerary.date_from }} - {{ itinerary.date_to }}</p>
         <p>{{ itinerary.location }}</p>
@@ -16,6 +23,8 @@
       </div>
     </a>
   </div>
-{% endfor %}
+  </div>
+  {% endfor %}
+  </div>
 
 {% endblock %}

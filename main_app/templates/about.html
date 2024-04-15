@@ -1,22 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="hero-container">
-      <h1>Welcome to Wander!</h1>
-      <p class="p-about">At Wander, we understand that the journey is just as important as the destination. That's why we've created the itinerary and travel app to help you explore the world with ease, excitement, and confidence.</p>
+<div class="row center-middle">
+      
+      <div class="col s6">
+            <h4><span class="highlight">Welcome to Wander!</span></h1><br>
+            <p>At Wander, we understand that the journey is just as important as the destination. That's why we've created the itinerary and travel app to help you explore the world with ease, excitement, and confidence.</p><br>
+            <a href="{% url 'attractionindex' %}" class="btn">start your travel journey</a>
+      </div>
+      <div class="col s6"><img class="about-img" src="../static/photos/stephan-mahlke-_sV6KGUWfFo-unsplash.jpg" alt=""></div>
 </div>
 
-<div class="hero-container">
-      <h2>Our Mission</h2>
-      <p class="p-about">At Wander, our mission is simple: to inspire, empower, and enrich the travel experience for adventurers of all kinds. Whether you're embarking on a solo expedition, a romantic getaway, or a family vacation, we're here to make your journey unforgettable.</p>
+<hr>
+<div class="hero-container mission">
+      <br>
+    <h2>Our Mission</h2>
+    <p class="p-about">Our mission is simple: to inspire, empower, and enrich the travel experience for adventurers of all kinds. Whether you're embarking on a solo expedition, a romantic getaway, or a family vacation, we're here to make your journey unforgettable.</p>
+    <br>
+    <br>
 </div>
+<hr>
 
-<div class="hero-container">
-      <h2>Join the Journey</h2>
-      <p class="p-about">Ready to embark on your next great adventure? Start using Wander today and unlock a world of endless possibilities.</p>
+<div class="heading-container">
+    <h2>Join the Journey</h2>
+    <p class="p-about">Ready to embark on your next great adventure? Start using Wander today and unlock a world of endless possibilities.</p><br>
+    <a href="{% url 'attractionindex' %}" class="btn btn-journey">Let's Wander Together</a>
 </div>
+<br><br><br><br><br><br>
 
-<p class="p-about">Let's Wander Together</p>
 
+
+
+{% endblock %}
+
+{% block scripts %}
 
 {% endblock %}

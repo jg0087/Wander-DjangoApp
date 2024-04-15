@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="heading-container">
-  <h1>Your Itineraries</h1>
+  <h1>View Public Itineraries</h1>
   {% if user.is_authenticated %}
   <a href="{% url 'itinerarys_create' %}" class="btn"><i style="color: black;">+</i></a>
   {% else %}
@@ -20,7 +20,7 @@
         <a href="{% url 'detail' itinerary.id %}">
           <div class="card-content">
             <span class="card-title">{{ itinerary.name }}</span>
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and user == itinerary.user %}
             <p>{{ itinerary.date_from }} - {{ itinerary.date_to }}</p>
             {% else %}
             {% endif %}
