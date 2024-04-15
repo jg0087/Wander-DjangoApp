@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Itinerary List</h1>
+<a href="{% url 'itinerarys_create' %}" class="btn">Add Itinerary</a>
+
+{% for itinerary in itinerarys %}
+  <div class="card">
+    <a href="{% url 'detail' itinerary.id %}">
+      <div class="card-content">
+        <span class="card-title">{{ itinerary.name }}</span>
+        <p>{{ itinerary.date_from }} - {{ itinerary.date_to }}</p>
+        <p>{{ itinerary.location }}</p>
+        <br>
+        <p>{{ itinerary.description }}</p>
+      </div>
+    </a>
+  </div>
+{% endfor %}
+
+{% endblock %}
