@@ -58,15 +58,9 @@ class ItineraryUpdate(LoginRequiredMixin, UpdateView):
    model = Itinerary
    fields = ['name', 'date_from', 'date_to', 'location', 'description']
 
-
 class ItineraryDelete(LoginRequiredMixin, DeleteView):
    model = Itinerary
    success_url = '/itinerarys'
-
-  
-
-# class AttractionList(ListView):
-#   model = Attraction
 
 def attractions_index(request):
   attractions = Attraction.objects.all()
@@ -125,11 +119,9 @@ def save_attraction(request):
   else:
     return redirect('/attractions')
 
-
 class AttractionUpdate(LoginRequiredMixin, UpdateView):
    model = Attraction
    fields = ['name', 'location']
-
 
 class AttractionDelete(LoginRequiredMixin, DeleteView):
    model = Attraction
@@ -155,11 +147,6 @@ def unassoc_attraction(request, itinerary_id, attraction_id):
   Itinerary.objects.get(id=itinerary_id).attractions.remove(attraction_id)
   return redirect('detail', itinerary_id=itinerary_id)
 
-# class Command(BaseCommand):
-#     def handle(self, *args, **kwargs):
-#         fetch_and_save_attractions(keyword='restaurants', location='New York')
-#         self.stdout.write(self.style.SUCCESS('Attractions fetched and saved successfully!'))
-
 def signup(request):
   error_message = ''
   if request.method == 'POST':
@@ -174,4 +161,3 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'registration/signup.html', context)
-

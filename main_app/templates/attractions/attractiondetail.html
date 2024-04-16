@@ -3,6 +3,7 @@
 
 <h1>Attraction Details & Reviews</h1>
 
+<!-- attractions start here -->
 <div class="row">
   <div class="col s12 m6"> 
       <div class="card">
@@ -20,11 +21,6 @@
     <div class="col s6">
       <div class="card">
         <div class="card-content">
-          <!-- {% if itinerary.fed_for_today %}
-            <div class="card-panel teal-text center-align">{{itinerary.name}} has been assigned an attraction</div>
-          {% else %}
-          <div class="card-panel red-text center-align">{{itinerary.name}} has no attractions</div>
-          {% endif %} -->
           <table>
             <thead>
               <tr><th>User</th><th>Review</th><th>Rating</th></tr>
@@ -44,26 +40,21 @@
     </div>
   </div>
 
-
     <!-- review form starts here -->
     {% if user.is_authenticated %}
     <div class="col s6">
       <form action="{% url 'add_review' attraction.id %}" method="POST">
         {% csrf_token %}
-        <!-- Render the inputs -->
         {{ review_form.as_p }}
         <input type="submit" class="btn" value="Add Review">
       </form>
     </div>
     {% else %}
     {% endif %}
-  
     <!-- review form ends here -->
       <br>
 </div>
 <!-- attractions end here -->
-<!-- review form view starts here -->
-<!-- review form view ends here -->
 </div>
 <script>
   const selectEl = document.getElementById('id_rating');
