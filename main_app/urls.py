@@ -3,7 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('about/', views.about, name='about'),
     path('itinerarys/', views.itinerarys_index, name='index'),
     path('itinerarys/<int:itinerary_id>/', views.itinerarys_detail, name='detail'),
     path('itinerarys/create/', views.ItineraryCreate.as_view(), name='itinerarys_create'),

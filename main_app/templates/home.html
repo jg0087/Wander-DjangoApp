@@ -1,9 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Home</h1>
+<div class="row center-middle">
+      
+      <div class="col s6">
+            <h4><span class="highlight">Welcome to Wander!</span></h1><br>
+            <p>Wander simplifies travel planning with intuitive features, ensuring seamless itinerary sharing, organization and exploration. From showcasing destinations to suggesting hidden gems, Wander transforms every journey into an adventure.</p><br>
+            <a href="{% url 'attractionindex' %}" class="btn">start your travel journey</a>
+      </div>
+      <div class="col s6"><img class="about-img" src="../static/photos/stephan-mahlke-_sV6KGUWfFo-unsplash.jpg" alt=""></div>
+</div>
+
 <hr>
-<p>Wander, a travel app assisting you in planning your next dream vacation.
-<br>Create an itinerary, add attractions, and leave reviews, so yourself and other can share your exciting adventures!</p>
+<div class="heading-container mission">
+      <br>
+    <h2>Our Mission</h2>
+    <p class="p-about">Our mission is simple: to inspire, empower, and enrich the travel experience for adventurers of all kinds. Whether you're embarking on a solo expedition, a romantic getaway, or a family vacation, we're here to make your journey unforgettable by also giving you the ability to share your own adventures with others.</p>
+    <img class="mission-img" src="../static/photos/ari-he-idIUCsynuS4-unsplash.jpg" alt="">
+    <br>
+    <br>
+</div>
+<hr>
+
+<div class="heading-container">
+    <h2>Join the Journey</h2>
+    <p class="p-about">Ready to embark on your next great adventure? Start using Wander today and unlock a world of endless possibilities.</p><br>
+    <a href="{% url 'attractionindex' %}" class="btn btn-journey">Let's Wander Together</a>
+</div>
+<br><br><br><br><br><br>
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
 
 {% endblock %}
