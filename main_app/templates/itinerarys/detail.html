@@ -30,7 +30,7 @@
       {% for attraction in attractions.all %}
       {% if forloop.counter0|divisibleby:2 %}
       <div class="row">
-      {% endif %}
+        {% endif %}
         <div class="col s6">
           <div class="card card-attraction">
             <a href="{% url 'attractiondetail' attraction.id %}">
@@ -49,15 +49,16 @@
             </div>
           </div>
         </div>
-      {% if forloop.counter|divisibleby:2 or forloop.last %}
+        {% if forloop.counter|divisibleby:2 or forloop.last %}
       </div>
       {% endif %}
       {% endfor %}
     </div>
+    <!-- list form ends here -->
     {% else %}
     {% endif %}
-</div>
-<!-- itinerarys end here -->
+  </div>
+  <!-- itinerarys end here -->
 <!-- list form view starts here -->
 <div class="row">
   <div class="col s6">
@@ -85,17 +86,12 @@
             </tr>
             </tbody>
         </table>
-
-          <!-- {% for attraction in itinerary.attractions.all %}
-            <li>{{attraction.name}}</li>
-          {% endfor %} -->
       </div>
     </div>
   </div>
 </div>
 <!-- list form view ends here -->
 
-    <!-- users saved attractions ends here  -->
 </div>
 
 <script>

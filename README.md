@@ -5,7 +5,6 @@
 Wander is an innovative attraction app designed to enhance your travels by connecting you with like-minded individuals who share your interests and passions. Whether you're a solo traveler seeking the best experiences in a city, a local looking to discover hidden gems in your city, or a group of friends planning your next adventure, Wander is your ultimate companion.
 
 ## :sparkles: How it Works:
-
 **Sign Up**: Create your Wander account and set up your profile, including your interests, preferences, and travel goals.
 
 **Explore**: Browse personalized recommendations, discover new attractions, and connect with fellow explorers who share your interests.
@@ -18,12 +17,16 @@ Wander is an innovative attraction app designed to enhance your travels by conne
 
 **Connect**: Create meaningful connections with like-minded individuals, share your experiences, and contribute to Wander's thriving community.
 
-
 Embark on a journey of discovery with Wander and unlock endless possibilities for exploration, connection, and adventure. Start using the app today and start wandering!
 
-
 # Screenshots
+<img src="/main_app/static/photos/Home Page.png">
 
+<img src="/main_app/static/photos/Itinerary Detail.png">
+
+<img src="/main_app/static/photos/Attraction Index.png">
+
+<img src="/main_app/static/photos/Attraction Detail.png">
 
 # :hammer_and_wrench: Languages and Tools :
 <div align="center">
@@ -31,23 +34,21 @@ Embark on a journey of discovery with Wander and unlock endless possibilities fo
 </div>
 
 # Getting Started
-- [START WANDERING]()
+- [START WANDERING](https://wanderapp2024-2213c11b239e.herokuapp.com/)
 - [TRELLO](https://trello.com/b/vIbzwvQu/wander)
 - [WIREFRAME](https://www.figma.com/file/3elG79HOehHqe8LFZnoIbN/GA-Wireframes?type=design&node-id=21-2&mode=design)
 
-
 # :computer: Developers
-
+- [Isaiah Miller](https://github.com/Isaiahmill14)
+- [Jorge Grey](https://github.com/jg0087)
+- [Seanna Arnold](https://github.com/Seanna-Arnold)
 
 # :loop: Next Steps
-
 - Customize the privacy settings of my shared itinerary, so that I can choose which ones are shared publicly and which ones are kept private.
 
 - Filter and sort public itineraries based on criteria such as location, duration, and type of activities, so that I can find relevant and suitable travel plans more efficiently.
 
 - Save or bookmark tourist attractions from other users' itineraries, so that I can easily add them to my own travel plans later.
-
-
 
 <p align="center">
 <img src="https://forthebadge.com/images/badges/built-with-love.png" title="JavaScript" alt="JavaScript" width="100" height="20" align="center"/>&nbsp;</p> 
